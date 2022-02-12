@@ -7,6 +7,14 @@ read word < /dev/tty
 pgrep -f "$word" > ptkword.txt
 
 echo Kill all processes that contain: "$word" ? [Y/N]
+
+
+
+while read p; do
+	pname=$(ps -p $p -o comm=)
+	echo $pname -  $p
+done<ptkword.txt
+
 read killall < /dev/tty
 
 

@@ -5,8 +5,13 @@ pgrep -f "gazebo" > ptk.txt
 pgrep -f  "rosmaster" >> ptk.txt
 
 echo Kill all processes? [Y/N]
-read killall < /dev/tty
 
+while read p; do
+	pname=$(ps -p $p -o comm=)
+	echo $pname - $p
+done<ptk.txt
+
+read killall < /dev/tty
 
 while read p; do
 	case "$killall" in
